@@ -93,6 +93,7 @@ def main():
             
             full_data = conn.recv(BUFFER_SIZE)
             time.sleep(0.5)
+            print(full_data)
             return_data = to_Google(full_data)
             conn.sendall(return_data)
             conn.close()
