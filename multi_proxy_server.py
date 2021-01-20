@@ -91,7 +91,7 @@ def main():
         #bind socket to address
         s.bind((HOST, PORT))
         #set to listening mode
-        s.listen(2)
+        s.listen(10)
         
         #continuously listen for connections
         while True:
