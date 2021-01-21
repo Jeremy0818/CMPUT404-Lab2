@@ -72,13 +72,14 @@ def to_Google(payload):
 def handle_helper(conn, addr):
     print("Handling: ", addr)
     full_data = conn.recv(BUFFER_SIZE)
+    print("Client's data: ", full_data)
     time.sleep(0.5)
     return_data = to_Google(full_data)
     conn.sendall(return_data)
 
 
 #define address & buffer size
-HOST = ""
+HOST = '127.0.0.1'
 PORT = 8001
 BUFFER_SIZE = 1024
 

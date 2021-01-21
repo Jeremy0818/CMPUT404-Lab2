@@ -37,8 +37,8 @@ def send_data(serversocket, payload):
 
 def connect(addr):
     try:
-        host = addr[0]
-        port = addr[1]
+        host = 'www.google.com'
+        port = 80
         payload = f'GET / HTTP/1.0\r\nHost: {host}\r\n\r\n'
         buffer_size = 4096
 
@@ -47,7 +47,7 @@ def connect(addr):
 
         remote_ip = get_remote_ip(host)
 
-        s.connect((remote_ip , port))
+        s.connect(addr)
         print (f'Socket Connected to {host} on ip {remote_ip}')
         
         #send the data and shutdown
@@ -63,9 +63,9 @@ def connect(addr):
             full_data += data
         #print(full_data)
         if (full_data[9:12] == b'200'):
-            print("    --- Good connection occured ---")
+            print("    --- Good connection occured, status code 400 received ---")
         else:
-            print("    --- Something other than 200 received ---")
+            print("    --- Something other than status code 200 received ---")
             print(full_data)
     except Exception as e:
         print(e)
@@ -74,10 +74,10 @@ def connect(addr):
         s.close()
 
 def main():
-    addr = [("", 8001)]
+    addr = [('127.0.0.1', 8001)]
     # establish 10 different connection
     with Pool() as p:
-        p.map(connect, addr * 10)
+        p.map(connect, addr * 20)
 
 if __name__ == "__main__":
     main()
